@@ -1,0 +1,222 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Fuel</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="css/all.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/responsive.dataTables.min.css">
+    <link rel="stylesheet" href="styles/shards-dashboards.1.1.0.min.css">
+    <link rel="stylesheet" href="styles/extras.1.1.0.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="Js/buttons.js"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon[37].ico" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+
+    <style>
+        #load {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            z-index: 9999;
+            background: url("images/Loader.gif") no-repeat center center rgba(0,0,0,0.25)
+        }
+    </style>
+
+</head>
+<body class="h-100">
+    <form id="form1" runat="server">
+
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Main Sidebar -->
+
+                <header id="header" class="header fixed-top">
+                    <div class="container-fluid">
+                        <div class="logo">
+                            <table style="font-size: 10px; color: #FFFFFF;">
+                                <tr>
+                                    <td rowspan="2"><a runat="server" id="LogoURL" href="index.aspx" style="margin-right: 10px;">
+                                        <img src="images/logo.png" style="height: 45px; margin-left: 15px;"></a></td>
+                                    <td style="word-wrap: break-word;"><%=User1 %> </td>
+                                </tr>
+                                <tr>
+                                    <td><%=X2 %> </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="FR">
+                            <nav class="nav-menu d-none d-lg-block">
+
+                                <ul class="">
+                                    <div class="logo" style="float: none; margin-left: 0">
+                                        <a href="#">
+                                            <img src="images/Midas-white.png"></a>
+                                    </div>
+
+                                    
+
+
+
+
+                                   <%-- <li class="drop-down" runat="server" id="Dashboard"><a href="Index.aspx"><i class="material-icons iconcolor">dashboard</i>
+                                        <span class="iconcolor" style="font-size: 12px;">Home</span></a>
+
+                                        
+
+                                    </li>--%>
+                               
+
+                              
+
+
+
+                                    <li class="drop-down" runat="server" id="Manage"><a href="#"><i class="material-icons iconcolor">table_chart</i>
+                                        <span style="font-size: 12px;" class="iconcolor">Bank</span></a>
+                                        <ul class="drop-down dropArrow">
+                                            <li runat="server" visible="true"><a href="ICICIReports.aspx">ICICI</a></li>
+                                            <li runat="server" visible="true"><a href="HDFC.aspx">HDFC</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="drop-down" runat="server" id="Li1"><a href="#"><i class="material-icons iconcolor">table_chart</i>
+                                        <span style="font-size: 12px;" class="iconcolor">Manage</span></a>
+                                        <ul class="drop-down dropArrow">
+                                             <li runat="server" visible="true"><a href="allocationfileupload.aspx">Allocation File Uploads</a></li>
+                                            <li runat="server" visible="true"><a href="Fangeble.aspx">Margin Limit</a></li>
+                                            <li runat="server" visible="true"><a href="noncash.aspx">Non Cash</a></li>
+                                            <li runat="server" visible="true"><a href="AllocationDone.aspx">Allocation Done</a></li>
+                                            <li runat="server" visible="true"><a href="Currentallocation.aspx">Current Allocation</a></li>
+                                            <li runat="server" visible="true"><a href="EarlyPayinClientsList.aspx">Early Payin Clients</a></li>
+                                            <%--<li runat="server" visible="true"><a href="MarginPledge.aspx">MarginPledge</a></li>--%>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </nav>
+
+                            <div class="postloginButon">
+                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= FName1%></button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <div class="PLR20">
+                                            <strong><%= Username%></strong>
+                                        </div>
+
+                                        <%--<a class="dropdown-item myProfLink" runat="server" href="Download.aspx"><i class="material-icons">download</i> Downloads</a>
+--%>
+
+
+                                        <asp:Button class="dropdown-item logOutLink" runat="server" Text="Logout" OnClick="Logout_Click" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </header>
+
+
+
+                <!-- End Main Sidebar -->
+
+
+                <main class="main-content container-fluid">
+
+                    <div id="load"></div>
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+
+
+                    <footer class="main-footer d-flex p-2 px-3 bg-white border-top">
+                        <ul class="nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" style="color: Red; font-size: medium;"><%= LUP%></a>
+
+                            </li>
+                        </ul>
+
+                        <span class="copyright ml-auto my-auto mr-2 fontstyle_head">
+                            <a href="https://www.sparkadvisors.in/dist/img/regulatory/Disclaimer_converted_converted.pdf" target="_blank" rel="nofollow">Disclaimer</a>
+                            | Copyright © 2024
+              <a href="http://vandansolution.com" rel="nofollow">Vandansolution</a>
+                        </span>
+                    </footer>
+
+                </main>
+            </div>
+        </div>
+        <script src="Js/jquery-3.3.1.min.js"></script>
+        <script src="Js/popper.min.js"></script>
+        <script src="Js/bootstrap.min.js"></script>
+        <script src="js/Chart.min.js"></script>
+        <script src="Js/shards.min.js"></script>
+        <script src="Js/jquery.sharrre.min.js"></script>
+        <script src="scripts/extras.1.1.0.min.js"></script>
+        <script src="scripts/shards-dashboards.1.1.0.min.js"></script>
+        <script src="scripts/app/app-blog-overview.1.1.0.js"></script>
+        <script src="Js/main.js"></script>
+        <script src="Js/jquery.dataTables.min.js"></script>
+        <script src="Js/dataTables.responsive.min.js"></script>
+        <script src="Js/dataTables.fixedColumns.min.js"></script>
+
+        <script>
+            /* $('#example').DataTable();*/
+        </script>
+
+        <script>
+            $('.datepicker1').datepicker({
+                format: "dd/mm/yyyy",
+                autoclose: true,
+                uiLibrary: 'bootstrap4'
+            });
+            $(document).ready(function () {
+                var table = $('#example').DataTable({
+                    scrollY: "400px",
+                    scrollX: true,
+                    scrollCollapse: true,
+                    //paging:         false,
+                    fixedColumns: {
+                        left: 1,
+                        right: 1
+                    }
+                });
+            });
+
+        </script>
+
+
+        <script>
+            document.onreadystatechange = function () {
+                var state = document.readyState
+                if (state == 'interactive') {
+                    document.getElementById('contents').style.visibility = "hidden";
+                } else if (state == 'complete') {
+                    setTimeout(function () {
+                        document.getElementById('interactive');
+                        document.getElementById('load').style.visibility = "hidden";
+                        document.getElementById('contents').style.visibility = "visible";
+                    }, 1000);
+                }
+            }
+        </script>
+
+
+    </form>
+</body>
+</html>

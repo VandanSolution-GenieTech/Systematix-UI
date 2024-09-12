@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="Component_86" width="32" height="32" viewBox="0 0 32 32">
+    <defs>
+        <style>
+            .cls-3{fill:#fff}
+        </style>
+    </defs>
+    <g id="Group_5194" transform="translate(6 9)">
+        <path id="Path_20446" d="M1 0h19a1 1 0 0 1 0 2H1a1 1 0 0 1 0-2z" class="cls-3"/>
+        <path id="Path_20447" d="M1 0h19a1 1 0 0 1 0 2H1a1 1 0 0 1 0-2z" class="cls-3" transform="translate(0 6)"/>
+        <path id="Path_20448" d="M1 0h19a1 1 0 0 1 0 2H1a1 1 0 0 1 0-2z" class="cls-3" transform="translate(0 12)"/>
+    </g>
+</svg>
