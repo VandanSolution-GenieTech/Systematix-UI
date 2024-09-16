@@ -15,66 +15,168 @@ public partial class ICICIReports : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
+            DateTime now = DateTime.Now;
+
+            if (FDate.Text == "")
+            {
+                FDate.Text = Convert.ToDateTime(now).ToString("dd/MM/yyyy");
+            }
+
+            if (TDate.Text == "")
+            {
+                TDate.Text = Convert.ToDateTime(now).ToString("dd/MM/yyyy");
+            }
+
+            BindTransactionDropdown();
             BindRepeater(FDate.Text, TDate.Text, Select.SelectedValue);
         }
-    } 
-
-    protected void Submit_Click(object sender, EventArgs e)
-    {
-        BindRepeater(FDate.Text, TDate.Text,  Select.SelectedValue);
     }
-
-    private void BindRepeater(string fromDate, string ToDate, string selectValue)
+    private void BindTransactionDropdown()
     {
         string connString = ConfigurationManager.AppSettings["brics"];
+
         using (MySqlConnection conn = new MySqlConnection(connString))
         {
-            using (MySqlCommand cmd = new MySqlCommand("GetDataByTypeAndDate,'" + Select.Text + "'", conn))
+            using (MySqlCommand cmd = new MySqlCommand("GetTypeofTransaction", conn))  
             {
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("type", 1);
-                DateTime fromDateValue;
-                DateTime toDateValue;
-
-                if (DateTime.TryParse(fromDate, out fromDateValue))
-                {
-                    cmd.Parameters.AddWithValue("fromdate", fromDateValue.ToString("yyyy-MM-dd"));
-                }
-                else
-                {
-                    cmd.Parameters.AddWithValue("fromdate", DBNull.Value);
-                }
-
-                if (DateTime.TryParse(ToDate, out toDateValue))
-                {
-                    cmd.Parameters.AddWithValue("todate", toDateValue.ToString("yyyy-MM-dd"));
-                }
-                else
-                {
-                    cmd.Parameters.AddWithValue("todate", DBNull.Value);
-                }
-
                 conn.Open();
+
                 using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
                 {
                     DataTable dt = new DataTable();
                     da.Fill(dt);
 
-                    dt.Columns.Add("BankName", typeof(string));
+                    // Add default "All" option at the top
+                    DataRow newRow = dt.NewRow();
+                    newRow["NameofTransaction"] = 0; 
+                    newRow["NameofTransaction"] = "All"; 
+                    dt.Rows.InsertAt(newRow, 0);
 
-                    foreach (DataRow row in dt.Rows)
-                    {
-                        int bankid = Convert.ToInt32(row["bankid"]);
-                        row["BankName"] = BankEnumType.GetBankName(bankid);
-                    }
-
-                    Repeater1.DataSource = dt;
-                    Repeater1.DataBind();
+                    Select.DataSource = dt;
+                    Select.DataTextField = "NameofTransaction"; 
+                    Select.DataValueField = "NameofTransaction";  
+                    Select.DataBind();
                 }
             }
         }
     }
+
+    protected void Submit_Click(object sender, EventArgs e)
+    {
+        BindRepeater(FDate.Text, TDate.Text, Select.SelectedValue);
+    }
+    private void BindRepeater(string fromDate, string ToDate,string Dropdown)
+
+    {
+
+        string connString = ConfigurationManager.AppSettings["brics"];
+
+        using (MySqlConnection conn = new MySqlConnection(connString))
+
+        {
+
+            using (MySqlCommand cmd = new MySqlCommand("GetDataByTypeAndDate", conn))
+
+            {
+
+                DateTime fromDateTime = DateTime.ParseExact(fromDate, "dd/MM/yyyy", null);
+                DateTime toDateTime = DateTime.ParseExact(ToDate, "dd/MM/yyyy", null);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("type", 1);
+                cmd.Parameters.AddWithValue("fromdate", fromDateTime);
+                cmd.Parameters.AddWithValue("todate", toDateTime);
+                cmd.Parameters.AddWithValue("mode", Dropdown);
+                
+
+                conn.Open();
+
+                using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
+
+                {
+
+                    DataTable dt = new DataTable();
+
+                    da.Fill(dt);
+
+                    dt.Columns.Add("BankName", typeof(string));
+
+                    foreach (DataRow row in dt.Rows)
+
+                    {
+
+                        int bankid = Convert.ToInt32(row["bankid"]);
+
+                        row["BankName"] = BankEnumType.GetBankName(bankid);
+
+                    }
+
+                    Repeater1.DataSource = dt;
+
+                    Repeater1.DataBind();
+
+                }
+
+            }
+
+        }
+
+    }
+
+
+    //private void BindRepeater(string fromDate, string ToDate, string selectValue)
+    //{
+    //    string connString = ConfigurationManager.AppSettings["brics"];
+    //    using (MySqlConnection conn = new MySqlConnection(connString))
+    //    {
+    //        using (MySqlCommand cmd = new MySqlCommand("GetDataByTypeAndDate,'" + Select.Text + "'", conn))
+    //        {
+    //            cmd.CommandType = CommandType.StoredProcedure;
+
+    //            cmd.Parameters.AddWithValue("type", 1);
+    //            DateTime fromDateValue;
+    //            DateTime toDateValue;
+
+    //            if (DateTime.TryParse(fromDate, out fromDateValue))
+    //            {
+    //                cmd.Parameters.AddWithValue("fromdate", fromDateValue.ToString("yyyy-MM-dd"));
+    //            }
+    //            else
+    //            {
+    //                cmd.Parameters.AddWithValue("fromdate", DBNull.Value);
+    //            }
+
+    //            if (DateTime.TryParse(ToDate, out toDateValue))
+    //            {
+    //                cmd.Parameters.AddWithValue("todate", toDateValue.ToString("yyyy-MM-dd"));
+    //            }
+    //            else
+    //            {
+    //                cmd.Parameters.AddWithValue("todate", DBNull.Value);
+    //            }
+
+    //            conn.Open();
+    //            using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
+    //            {
+    //                DataTable dt = new DataTable();
+    //                da.Fill(dt);
+
+    //                dt.Columns.Add("BankName", typeof(string));
+
+    //                foreach (DataRow row in dt.Rows)
+    //                {
+    //                    int bankid = Convert.ToInt32(row["bankid"]);
+    //                    row["BankName"] = BankEnumType.GetBankName(bankid);
+    //                }
+
+    //                Repeater1.DataSource = dt;
+    //                Repeater1.DataBind();
+    //            }
+    //        }
+    //    }
+    //}
 
     protected void export_Click(object sender, EventArgs e)
     {
