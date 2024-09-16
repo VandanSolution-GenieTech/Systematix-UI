@@ -15,21 +15,21 @@ public partial class ICICIReports : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            BindRepeater(FDate.Text, TDate.Text);
+            BindRepeater(FDate.Text, TDate.Text, Select.SelectedValue);
         }
     } 
 
     protected void Submit_Click(object sender, EventArgs e)
     {
-        BindRepeater(FDate.Text, TDate.Text);
+        BindRepeater(FDate.Text, TDate.Text,  Select.SelectedValue);
     }
 
-    private void BindRepeater(string fromDate, string ToDate)
+    private void BindRepeater(string fromDate, string ToDate, string selectValue)
     {
         string connString = ConfigurationManager.AppSettings["brics"];
         using (MySqlConnection conn = new MySqlConnection(connString))
         {
-            using (MySqlCommand cmd = new MySqlCommand("GetDataByTypeAndDate", conn))
+            using (MySqlCommand cmd = new MySqlCommand("GetDataByTypeAndDate,'" + Select.Text + "'", conn))
             {
                 cmd.CommandType = CommandType.StoredProcedure;
 
@@ -78,7 +78,7 @@ public partial class ICICIReports : System.Web.UI.Page
 
     protected void export_Click(object sender, EventArgs e)
     {
-        BindRepeater(FDate.Text, TDate.Text);
+        BindRepeater(FDate.Text, TDate.Text, Select.SelectedValue);
 
         DataTable dt = (Repeater1.DataSource as DataTable);
         string filename = "BankTransaction_ICICI_" + DateTime.Now.ToString("yyyy-MM-dd") + ".xls";

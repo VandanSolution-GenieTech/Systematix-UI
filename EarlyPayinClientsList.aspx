@@ -15,8 +15,10 @@
                 </div>
 
             </div>
+
             <div class="col-lg-2 mb-1">
                 <div class="page-header row no-gutters py-3">
+                     <asp:FileUpload runat="server" ID="Fileupload" />
                     <asp:TextBox runat="server"  ID="earlypayinclient" class="form-control"
                                  Width="220px" placeholder="client"></asp:TextBox>                    
                 </div>

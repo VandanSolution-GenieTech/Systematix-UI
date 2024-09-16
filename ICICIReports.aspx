@@ -11,7 +11,7 @@
 
                 <div class="page-header row no-gutters py-3">
                     <h3 class="page-title fontstyle">ICICI Transaction</h3>
-                    <span class="page-subtitle" style="vertical-align: text-bottom;">&nbsp;(Amt in ₹)</span>
+                    <span class="page-subtitle" style="vertical-align: text-bottom;">&nbsp;</span>
                 </div>
 
             </div>
@@ -45,8 +45,11 @@
                                 <asp:TextBox runat="server" ID="TDate" type="text" autocomplete="off" AutoCompleteType="Disabled" class="input-sm form-control datepicker1" placeholder="End Date"></asp:TextBox>
                             </div>
                         </label>
-
-
+                         <label>
+							<div id="" class=" input-group input-group-sm my-auto ml-auto mr-auto ml-sm-auto mr-sm-0" style="max-width: 350px;">
+							  <asp:DropDownList runat="server" ID="Select" class="custom-select js-example-basic-single" style="max-width: 350px; width: 200px;"></asp:DropDownList>
+							</div>
+                                     </label>
                         <label>
                             <span class="ml-auto text-right text-semibold text-reagent-gray">
                                 <div id="Div3" class="input-group input-group-sm my-auto ml-auto mr-auto ml-sm-auto mr-sm-0" style="max-width: 350px;">

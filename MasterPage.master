@@ -90,8 +90,12 @@
                                     <li class="drop-down" runat="server" id="Manage"><a href="#"><i class="material-icons iconcolor">table_chart</i>
                                         <span style="font-size: 12px;" class="iconcolor">Bank</span></a>
                                         <ul class="drop-down dropArrow">
+                                             <li class="drop-down"><a href="#"><span>Reports</span></a>
+                                                 <ul class="drop-down" style="margin-left:-390px; width:200px;">
                                             <li runat="server" visible="true"><a href="ICICIReports.aspx">ICICI</a></li>
                                             <li runat="server" visible="true"><a href="HDFC.aspx">HDFC</a></li>
+                                                      </ul>
+                                            </li>
                                         </ul>
                                     </li>
 
